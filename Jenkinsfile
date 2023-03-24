@@ -7,6 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh('''
+                    cat semver.sh
                     bash ./semver.sh --version
                 ''')
             }
