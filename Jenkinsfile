@@ -1,6 +1,4 @@
-@Library('semver') _
 
-import com.vdurmont.semver4j.Semver
 
 pipeline {
     agent any
@@ -8,26 +6,28 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Run your build steps here...
+                sh('''
+                    bash ./semver.sh --version
+                ''')
             }
         }
     }
 
-    post {
-        always {
-            script {
-                // Generate a new version number using the semver library
-                def version = new Semver("1.2.3")
-                    .incrementPatch()
-                    .setPreReleaseVersion("alpha")
-                    .getValue()
+    // post {
+    //     always {
+    //         script {
+    //             // Generate a new version number using the semver library
+    //             def version = new Semver("1.2.3")
+    //                 .incrementPatch()
+    //                 .setPreReleaseVersion("alpha")
+    //                 .getValue()
 
-                // Set the version number as an environment variable for use in later stages
-                env.VERSION = version
+    //             // Set the version number as an environment variable for use in later stages
+    //             env.VERSION = version
 
-                // Print the version number to the console
-                echo "New version number: ${version}"
-            }
-        }
-    }
+    //             // Print the version number to the console
+    //             echo "New version number: ${version}"
+    //         }
+    //     }
+    // }
 }
