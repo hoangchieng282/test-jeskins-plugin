@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh('''
                     cat semver.sh
-                    bash ./semver.sh --version
+                    bash ./semver.sh validate 23.1.0-rc
                 ''')
             }
         }
