@@ -421,6 +421,7 @@ function command_validate {
     echo "valid"
   else
     echo "invalid"
+    error "version $1 does not match the semver scheme 'X.Y.Z(-PRERELEASE)(+BUILD)'. See help for more information."
   fi
 
   exit 0
